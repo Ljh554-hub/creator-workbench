@@ -835,9 +835,12 @@ const FEED_POOL={
   {title:"被讨厌的勇气",author:"岸见一郎 / 古贺史健",source:"心理成长",cat:"成长",reason:"阿德勒心理学入门，自由就是被别人讨厌。",url:"https://book.douban.com/subject/26685160/"}
  ]
 };
-/* 数据源：默认使用你已初始化的 GitHub Gist（用本 token 创建），所有设备一致；为空则用内置每日推荐 */
+/* 数据源：默认使用仓库每日自动化写入的 autofeed（GitHub Actions 每天 09:00 重写 main 分支），所有设备一致；为空则用内置每日推荐 */
 let feedSourceUrl=LS.get('feedSourceUrl','');
-if(!feedSourceUrl){ feedSourceUrl='https://gist.githubusercontent.com/Ljh554-hub/cbaf0b06d4c393f87b7fade396c33661/raw/'; LS.set('feedSourceUrl',feedSourceUrl); }
+const FEED_REPO_BASE='https://raw.githubusercontent.com/Ljh554-hub/creator-workbench/main/autofeed/';
+const FEED_OLD_GIST='https://gist.githubusercontent.com/Ljh554-hub/cbaf0b06d4c393f87b7fade396c33661/raw/';
+/* 自动迁移：若仍指向旧 Gist，则切到仓库 raw 源，使已部署实例下次刷新即生效 */
+if(!feedSourceUrl || feedSourceUrl===FEED_OLD_GIST){ feedSourceUrl=FEED_REPO_BASE; LS.set('feedSourceUrl',feedSourceUrl); }
 function getFeedUrl(id){
   if(feedSourceUrl) return feedSourceUrl.trim().replace(/\/$/,'')+'/'+id+'.json?t='+Date.now();
   return 'autofeed/'+id+'.json?t='+Date.now();
