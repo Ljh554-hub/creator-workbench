@@ -1,0 +1,57 @@
+# 每日精选自动更新工作流
+# 每天 UTC 01:00（北京时间 09:00）自动生成新的 autofeed/*.json
+# 需要在 GitHub 仓库 Settings > Secrets 中配置（可选）：
+#   FEED_API_KEY - 如果用外部 AI API 生成内容
+#
+# 启用方法：
+# 1. 将本文件放到仓库 .github/workflows/daily-feed.yml
+# 2. 确保 scripts/generate-feed.js 同步提交到仓库
+# 3. 在仓库 Actions 页面启用此工作流
+
+name: Daily Feed Update
+
+on:
+  schedule:
+    # 每天 01:00 UTC = 09:00 北京时间
+    - cron: '0 1 * * *'
+  workflow_dispatch:  # 支持手动触发
+
+permissions:
+  contents: write
+
+jobs:
+  update-feed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generate today's feed data
+        run: node scripts/generate-feed.js
+        env:
+          TODAY: ${{ github.event.schedule && 'auto' || 'manual' }}
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if git diff --quiet autofeed/; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add autofeed/
+          today=$(date -u +%Y-%m-%d)
+          time=$(date -u +%H:%M:%S)
+          git commit -m "📡 每日精选更新 ${today}T${time}+00:00 [skip ci]"
+          git push

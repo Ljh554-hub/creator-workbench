@@ -1,0 +1,10 @@
+# 本地项目数据，不纳入版本控制 / 不上传 GitHub
+.workbuddy/
+
+# 临时校验文件
+wb_check.js
+
+# 操作系统 / 编辑器冗余
+.DS_Store
+Thumbs.db
+*.log

@@ -1,0 +1,12 @@
+{
+  "name": "创作工作台 Self-Media Studio",
+  "short_name": "创作工作台",
+  "description": "为内容创作者量身打造的 12 模块工作台：每日计划、减肥运动、英语、播客、表达、读书、妆容、爆款二创、AI学习、新闻、复盘、天气",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#F4F8FC",
+  "theme_color": "#4A90D9",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}
