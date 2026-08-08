@@ -349,6 +349,20 @@ body.cards-morandi-ocean .video-card .thumb{background:linear-gradient(135deg,#8
 .sync-token-section{border-top:1px solid var(--border);padding-top:14px;}
 .sync-token-section .label{font-size:13px;margin-bottom:6px;display:block;color:var(--muted);}
 @media(max-width:760px){.feed-panel{padding:12px;}.fi-body{max-height:160px;}}
+/* ===== 访问密码锁屏 ===== */
+.lock-screen{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:linear-gradient(135deg,#E9E4DC,#D6CDC1);}
+.lock-card{background:var(--card,#FAF8F5);border:1px solid var(--line,#E5DFD6);border-radius:18px;box-shadow:0 18px 50px rgba(80,70,60,.20);padding:30px 26px;width:340px;max-width:90vw;text-align:center;}
+.lock-card .lc-emoji{font-size:46px;line-height:1;}
+.lock-card .lc-title{font-size:19px;font-weight:700;margin:8px 0 2px;color:var(--dark,#4A4642);}
+.lock-card .lc-sub{font-size:12.5px;color:var(--muted,#9a958c);margin-bottom:16px;}
+.lock-card input{width:100%;box-sizing:border-box;padding:11px 13px;border:1px solid var(--line,#E5DFD6);border-radius:10px;font-size:14px;margin-bottom:10px;background:var(--bg,#F0EDE8);color:var(--dark,#4A4642);}
+.lock-card .btn{width:100%;}
+.lock-err{color:var(--danger,#C4786A);font-size:12.5px;min-height:16px;margin-bottom:8px;}
+/* ===== 摘录面板 ===== */
+.ex-add{display:flex;gap:8px;align-items:flex-start;margin:8px 0 12px;}
+.ex-add .textarea{flex:1;min-height:52px;}
+.ex-list{display:flex;flex-direction:column;gap:8px;}
+.ex-empty{font-size:13px;color:var(--muted);padding:4px 0;}
 </style>
 </head>
 <body class="nav-morandi-lavender cards-morandi-warm">
@@ -363,6 +377,7 @@ body.cards-morandi-ocean .video-card .thumb{background:linear-gradient(135deg,#8
       <button onclick="openSync()">🔄 同步</button>
       <button onclick="openStyle()">🎨 样式</button>
       <button onclick="openBackup()">💾 备份</button>
+      <button id="sbLock" onclick="lockNow()" style="display:none">🔒 锁定</button>
       <div class="date" id="sbDate">2026/7/31</div>
     </div>
   </aside>
@@ -372,6 +387,7 @@ body.cards-morandi-ocean .video-card .thumb{background:linear-gradient(135deg,#8
 <div class="overlay" id="overlay" onclick="closeDrawer()"></div>
 
 <div class="modal-mask" id="mask"><div class="modal" id="modal"></div></div>
+<div id="lockScreen" class="lock-screen"></div>
 
 <script>
 /* ========== 工具 ========== */
@@ -518,7 +534,8 @@ function defaultModules(){
       ]},
     {id:'notes', name:'笔记', ico:'📝', kind:'notes',
       links:[],
-      tags:[], notes:[]}
+      tags:[], notes:[]},
+    {id:'excerpts', name:'我的摘录', ico:'📌', fixed:true, kind:'excerpts'}
   ];
   function c(tab,title,author,dur,platform,url,grad,note){return {id:uid(),tab,title,author,dur:dur?String(dur):'',platform,url:url||'',grad:grad||'blue',note:note||''};}
 }
@@ -547,7 +564,10 @@ const bk=state.modules.find(m=>m.id==='books');
 if(bk){ bk.quotes=bk.quotes||[]; if(!bk.quoteCats||!bk.quoteCats.length) bk.quoteCats=['好句摘录','读后感悟','章节随笔','书单备忘']; }
 // 笔记模块：旧数据可能没有该模块，补上（放到侧栏末尾）
 if(!state.modules.find(m=>m.id==='notes')){ state.modules.push({id:'notes',name:'笔记',ico:'📝',kind:'notes',links:[],tags:[],notes:[]}); }
+// 摘录模块：旧数据可能没有，补上
+if(!state.modules.find(m=>m.id==='excerpts')){ state.modules.push({id:'excerpts',name:'我的摘录',ico:'📌',fixed:true,kind:'excerpts'}); }
 state.modules.forEach(m=>{ if(m.kind==='notes'){ m.tags=m.tags||[]; m.notes=m.notes||[]; } });
+state.modules.forEach(m=>{ if(m.kind!=='home'){ if(!m.excerpts||!Array.isArray(m.excerpts)) m.excerpts=[]; } });
 state.title = state.title||'创作工作台';
 state.avatar = state.avatar||'⭐';
 state.bg = state.bg||'';
@@ -681,11 +701,12 @@ function renderModule(){
   const main=$('#main');
   if(!m){ main.innerHTML='<div class="empty">未找到模块</div>'; return; }
   if(m.kind==='home'){ renderHome(main); return; }
-  if(m.id==='workout'){ renderWorkout(main); return; }
-  if(m.id==='english'){ renderStudy(main); return; }
-  if(m.kind==='notes'){ renderNotes(main); return; }
-  if(m.id==='books'){ renderBooks(main); return; }
-  renderContent(main,m);
+  if(m.kind==='excerpts'){ renderExcerptsPage(main); return; }
+  if(m.id==='workout'){ renderWorkout(main); }
+  else if(m.id==='english'){ renderStudy(main); }
+  else if(m.kind==='notes'){ renderNotes(main); }
+  else if(m.id==='books'){ renderBooks(main); }
+  else { renderContent(main,m); }
 }
 function modHead(m, extra='', sub='', showStd=true, primary=null){
   const tabBtn = m.kind==='notes' ? `<button onclick="manageTags('${m.id}')">🏷 标签</button>` : `<button onclick="manageTabs('${m.id}')">🏷 子标签</button>`;
@@ -835,6 +856,8 @@ const FEED_POOL={
   {title:"被讨厌的勇气",author:"岸见一郎 / 古贺史健",source:"心理成长",cat:"成长",reason:"阿德勒心理学入门，自由就是被别人讨厌。",url:"https://book.douban.com/subject/26685160/"}
  ]
 };
+/* 读书推荐数据：用基于书名的豆瓣搜索链接覆盖硬编码 subject ID（原 ID 部分已失效） */
+(FEED_POOL.books||[]).forEach(b=>{ b.url=bookSearchUrl(b.title); });
 /* 数据源：默认使用仓库每日自动化写入的 autofeed（GitHub Actions 每天 09:00 重写 main 分支），所有设备一致；为空则用内置每日推荐 */
 let feedSourceUrl=LS.get('feedSourceUrl','');
 const FEED_REPO_BASE='https://raw.githubusercontent.com/Ljh554-hub/creator-workbench/main/autofeed/';
@@ -854,6 +877,8 @@ function seededPick(arr,n,seedStr){
   return a.slice(0,n);
 }
 function hasFeed(id){ return FEED_IDS.includes(id); }
+/* 读书推荐：基于书名生成豆瓣搜索链接，规避硬编码 subject ID 错位（如「何以中国」原 ID 已失效） */
+function bookSearchUrl(title){ return 'https://book.douban.com/subject_search?search_text='+encodeURIComponent((title||'').trim()); }
 /* 判断是否需要自动刷新（每天9点后首次加载时刷新） */
 function needAutoRefresh(id){
   const today=todayStr();
@@ -880,6 +905,7 @@ function loadAutofeed(id, elId, force){
       } else {
         /* 数据源过期（无人每日重写）：改用按日期种子本地生成的“今日推荐”，保证每天新鲜且各设备一致 */
         const fb=generateFallbackFeed(id);
+        feedCache[id]=fb;
         el.innerHTML=renderFeed({date:todayStr(),items:fb}, id, true, true);
       }
       if(btn){ btn.classList.remove('spin'); btn.textContent='🔄 刷新'; }
@@ -887,6 +913,7 @@ function loadAutofeed(id, elId, force){
     .catch(err=>{
       console.warn('[autofeed] fetch failed, use local daily pool:', err.message);
       const fb=generateFallbackFeed(id);
+      feedCache[id]=fb;
       el.innerHTML=renderFeed({date:todayStr(),items:fb}, id, true, true);
       if(btn){ btn.classList.remove('spin'); btn.textContent='🔄 刷新'; }
     });
@@ -919,7 +946,7 @@ function renderFeed(d, id, isFresh, isFallback){
 }
 function feedItemInner(id, it, i){
   let title=esc(it.title||''), meta='', body='';
-  const u=it.url||'';
+  const u=(id==='books'&&it.title)?bookSearchUrl(it.title):(it.url||'');
   /* 标题可点击跳转链接 */
   const titleHtml=u?'<a class="fi-title" href="'+esc(u)+'" target="_blank" rel="noopener">'+title+' ↗</a>':'<span class="fi-title">'+title+'</span>';
   if(id==='podcast'){
@@ -942,7 +969,7 @@ function feedItemInner(id, it, i){
 /* 查看精选完整内容弹窗 */
 function viewFeedDetail(id, idx){
   const it=(feedCache[id]||[])[idx]; if(!it) return;
-  const u=it.url||'';
+  const u=(id==='books'&&it.title)?bookSearchUrl(it.title):(it.url||'');
   let detailHtml='';
   if(id==='podcast'){
     detailHtml='<div class="fd-row"><span class="fd-label">主播/作者</span><span>'+esc(it.author||'-')+'</span></div>'
@@ -978,7 +1005,7 @@ function collectFeed(id, i){
   }else if(id==='express'){
     card={id:uid(),tab:'t1',title:it.title||((it.scenario||'')+'练嘴素材'),author:it.scenario||'',dur:'',platform:'网页',url:it.url||'',grad,note:((it.text||'')+(it.tip?'\n\n💡 '+(it.tip):''))};
   }else{ // books
-    card={id:uid(),tab:'t1',title:it.title||'精选好书',author:it.author||'',dur:'',platform:'网页',url:it.url||'',grad,note:it.reason||''};
+    card={id:uid(),tab:'t1',title:it.title||'精选好书',author:it.author||'',dur:'',platform:'网页',url:bookSearchUrl(it.title),grad,note:it.reason||''};
   }
   m.cards.unshift(card); save();
   alert(`已把「${it.title||'该条精选'}」收藏到「${m.name}」我的库（可在「全部」分类查看）`);
@@ -1781,6 +1808,118 @@ function saveStudyNote(){
 }
 function delStudyNote(id){ const m=getEnglish(); const n=m.studyNotes.find(x=>x.id===id); if(!n)return; if(!confirm('确定删除学习笔记「'+(n.title||'未命名')+'」？'))return; m.studyNotes=m.studyNotes.filter(x=>x.id!==id); save(); closeM(); renderModule(); }
 
+/* ========== 我的摘录（左侧独立栏目：聚合所有模块的摘录） ========== */
+let exEditId='', exDraft={text:'',cat:''}, exEditingId=null, exFilterMod='';
+function setExFilter(id){ exFilterMod=id; renderModule(); }
+function excerptMods(){ return state.modules.filter(x=>x.id!=='home' && x.kind!=='home' && x.kind!=='excerpts' && x.id!=='excerpts'); }
+function renderExcerptsPage(root){
+  const m=state.modules.find(x=>x.id==='excerpts'); if(!m){ root.innerHTML='<div class="empty">未找到模块</div>'; return; }
+  const mods=excerptMods();
+  const targetId=exFilterMod || (mods[0]&&mods[0].id) || '';
+  const filterTabs=[{id:'',name:'全部'}].concat(mods.map(x=>({id:x.id,name:x.name})));
+  const filterHtml=filterTabs.map(t=>`<div class="cat-tab ${exFilterMod===t.id?'on':''}" onclick="setExFilter('${t.id}')">${esc(t.name)}</div>`).join('');
+  let groups=[];
+  state.modules.forEach(x=>{
+    if(x.id==='home'||x.kind==='home'||x.kind==='excerpts'||x.id==='excerpts') return;
+    const list=(x.excerpts||[]).slice().sort((a,b)=>String(b.created||'').localeCompare(String(a.created||'')));
+    if(exFilterMod && exFilterMod!==x.id) return;
+    if(list.length) groups.push({mod:x,list});
+  });
+  let bodyHtml;
+  if(!groups.length) bodyHtml='<div class="ex-empty">还没有摘录，写下你随时想记的一句话 ✍️</div>';
+  else bodyHtml=groups.map(g=>`<div class="ex-group"><div class="ex-group-head">${g.mod.ico||'📌'} ${esc(g.mod.name)} <span class="muted-mini">${g.list.length} 条</span></div><div class="ex-list">${g.list.map(x=>excerptCardHtml(g.mod,x)).join('')}</div></div>`).join('');
+  root.innerHTML = modHead(m)
+    + `<div class="cat-tabs">${filterHtml}</div>`
+    + `<div class="panel"><div class="ex-add">`
+    + `<textarea id="exQuick" class="textarea" placeholder="随时记下一点什么，回车或点「添加」保存…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();quickAddExcerpt('${esc(targetId)}')}"></textarea>`
+    + `<button class="btn soft sm" onclick="quickAddExcerpt('${esc(targetId)}')">＋ 添加摘录</button>`
+    + `</div></div>`
+    + `<div class="ex-groups">${bodyHtml}</div>`;
+}
+function excerptCardHtml(m, x){
+  const text=(x.text||'').trim();
+  const xid=esc(x.id); const mid=esc(m.id);
+  const bodyHtml = text
+    ? '<div class="sn-row-body" id="exBody_'+xid+'" contenteditable="false" ondblclick="toggleExEdit(\''+xid+'\',\''+mid+'\')" onblur="onExBlur(\''+xid+'\',\''+mid+'\',this)">'+esc(text)+'</div>'
+      + '<div class="sn-edit-bar" id="exBar_'+xid+'" style="display:none"><button class="btn soft sm" onclick="saveExBody(\''+xid+'\',\''+mid+'\')">💾 保存</button><button class="btn soft sm" onclick="cancelExBody(\''+xid+'\',\''+mid+'\')">取消</button></div>'
+    : '<div class="sn-edit-bar"><button class="btn soft sm" onclick="openExcerpt(\''+mid+'\',\''+xid+'\')">📝 添加内容</button></div>';
+  return '<div class="sn-row" data-nid="'+xid+'">'
+    + '<div class="sn-row-head">'
+    + '<span class="sn-row-title">📌 摘录</span>'
+    + ((x.cat)?'<span class="sn-row-cats"><span class="ntag sm">'+esc(x.cat)+'</span></span>':'')
+    + '<span class="sn-row-date">'+esc(x.updated||x.created||'')+'</span>'
+    + '<span class="sn-row-acts"><button class="btn soft sm" onclick="openExcerpt(\''+mid+'\',\''+xid+'\')">✎ 编辑</button><button class="btn danger sm" onclick="delExcerpt(\''+mid+'\',\''+xid+'\')">🗑</button></span>'
+    + '</div>'
+    + bodyHtml
+    + '</div>';
+}
+function quickAddExcerpt(mId){
+  if(!mId){ const mods=excerptMods(); mId=(mods[0]&&mods[0].id)||''; }
+  const m=state.modules.find(x=>x.id===mId); if(!m) return;
+  const el=document.getElementById('exQuick'); if(!el) return;
+  const text=el.value.trim(); if(!text) return;
+  const now=fmtDateTime(Date.now());
+  if(!m.excerpts) m.excerpts=[];
+  m.excerpts.unshift({id:uid(), text, cat:'', created:now, updated:now});
+  save(); renderModule();
+}
+function openExcerpt(mId, id){
+  const m=state.modules.find(x=>x.id===mId); if(!m) return;
+  const x=id?m.excerpts.find(e=>e.id===id):null;
+  exEditId=id||'';
+  exDraft=x?{text:x.text||'',cat:x.cat||''}:{text:'',cat:''};
+  openModal(id?'✏️ 编辑摘录':'📌 新建摘录', `
+    <div class="field"><span class="label">内容</span><textarea class="textarea" id="exText" style="min-height:120px" placeholder="记下你想记录的内容…">${esc(exDraft.text)}</textarea></div>
+    <div class="field"><span class="label">分类标签（选填，如：金句 / 灵感 / 待办）</span><input class="input" id="exCat" value="${esc(exDraft.cat)}" placeholder="如：金句"></div>
+    <div class="modal-acts" style="justify-content:flex-start">
+      <button class="btn" onclick="saveExcerpt('${esc(mId)}')">${id?'更新':'保存'}</button>
+      ${id?`<button class="btn danger sm" onclick="delExcerpt('${esc(mId)}','${id}')">删除</button>`:''}
+      <button class="btn soft sm" onclick="closeM()">取消</button>
+    </div>`);
+}
+function saveExcerpt(mId){
+  const m=state.modules.find(x=>x.id===mId); if(!m) return;
+  const text=$('#exText').value.trim(); if(!text){ alert('内容不能为空'); return; }
+  const cat=$('#exCat').value.trim();
+  const now=fmtDateTime(Date.now());
+  if(!m.excerpts) m.excerpts=[];
+  if(exEditId){ const x=m.excerpts.find(e=>e.id===exEditId); if(x){ x.text=text; x.cat=cat; x.updated=now; } }
+  else { m.excerpts.unshift({id:uid(), text, cat, created:now, updated:now}); }
+  save(); closeM(); renderModule();
+}
+function delExcerpt(mId, id){
+  const m=state.modules.find(x=>x.id===mId); if(!m) return;
+  const x=m.excerpts.find(e=>e.id===id); if(!x) return;
+  if(!confirm('确定删除这条摘录？')) return;
+  m.excerpts=m.excerpts.filter(e=>e.id!==id); save(); closeM(); renderModule();
+}
+function toggleExEdit(id, mId){
+  const el=document.getElementById('exBody_'+id); const bar=document.getElementById('exBar_'+id);
+  if(!el||!bar) return;
+  if(exEditingId && exEditingId.split('|')[0]!==id){ const p=exEditingId.split('|'); cancelExBody(p[0],p[1]); }
+  if(el.contentEditable==='true'){ el.contentEditable='false'; bar.style.display='none'; exEditingId=null; }
+  else { el.contentEditable='true'; el.focus(); bar.style.display='flex'; exEditingId=id+'|'+mId;
+    const s=window.getSelection(); const r=document.createRange(); r.selectNodeContents(el); r.collapse(false); s.removeAllRanges(); s.addRange(r); }
+}
+function onExBlur(id, mId, el){ setTimeout(()=>{ if(exEditingId===id+'|'+mId) saveExBody(id, mId); },150); }
+function saveExBody(id, mId){
+  const el=document.getElementById('exBody_'+id); const bar=document.getElementById('exBar_'+id);
+  if(!el) return;
+  const text=el.innerText.replace(/\n$/,'');
+  const m=state.modules.find(x=>x.id===mId); if(!m) return;
+  const x=m.excerpts.find(e=>e.id===id); if(x){ x.text=text; x.updated=fmtDateTime(Date.now()); save(); }
+  el.contentEditable='false'; if(bar) bar.style.display='none'; exEditingId=null;
+  renderModule();
+}
+function cancelExBody(id, mId){
+  const el=document.getElementById('exBody_'+id); const bar=document.getElementById('exBar_'+id);
+  if(!el) return;
+  const m=state.modules.find(x=>x.id===mId); if(!m) return;
+  const x=m.excerpts.find(e=>e.id===id);
+  el.innerHTML=esc(x?(x.text||''):'');
+  el.contentEditable='false'; if(bar) bar.style.display='none'; exEditingId=null;
+}
+
 /* ========== 笔记模块（自建标签 + 图文） ========== */
 function setNoteFilter(tag){ noteFilterTag=tag; renderModule(); }
 function renderNotes(root){
@@ -2137,7 +2276,28 @@ function openWorkbenchSet(){
       <div style="font-size:12px;color:var(--muted);margin-bottom:6px">留空则使用本地文件；填写 GitHub 仓库 Raw 地址则所有设备自动一致（推荐）</div>
       <input class="input" id="feedSrcUrl" value="${esc(feedSourceUrl)}" placeholder="如 https://gist.githubusercontent.com/Ljh554-hub/<gistId>/raw/ 或 https://raw.githubusercontent.com/<你>/<仓库>/main/autofeed/">
     </div>
-    <div class="modal-acts" style="justify-content:flex-start;gap:10px"><button class="btn" onclick="saveWorkbenchSet()">保存</button><button class="btn soft" onclick="closeM()">取消</button></div>`);
+    <div class="field" style="border-top:1px solid var(--line);padding-top:12px;margin-top:8px">
+      <span class="label">🔒 访问密码保护</span>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:6px">启用后，打开本工作台需输入密码才能查看内容；忘记密码只能清除本机数据后重新同步。</div>
+      ${getPwdHash()?`
+        <div style="font-size:13px;margin-bottom:8px">✅ 已启用密码保护</div>
+        <input class="input" id="pwCur" type="password" placeholder="当前密码" autocomplete="off">
+        <div style="height:6px"></div>
+        <input class="input" id="pwNew" type="password" placeholder="新密码（留空则不修改）" autocomplete="off">
+        <div style="height:6px"></div>
+        <input class="input" id="pwNew2" type="password" placeholder="再次输入新密码" autocomplete="off">
+        <div style="margin-top:8px;display:flex;gap:8px">
+          <button class="btn soft" onclick="savePassword()">更新密码</button>
+          <button class="btn danger soft" onclick="removePassword()">关闭密码保护</button>
+        </div>
+      `:`
+        <input class="input" id="pwNew" type="password" placeholder="设置访问密码（至少 4 位）" autocomplete="off">
+        <div style="height:6px"></div>
+        <input class="input" id="pwNew2" type="password" placeholder="再次输入密码" autocomplete="off">
+        <div style="margin-top:8px"><button class="btn" onclick="savePassword()">启用密码保护</button></div>
+      `}
+    </div>
+    <div class="modal-acts" style="justify-content:flex-start;gap:10px"><button class="btn" onclick="saveWorkbenchSet()">保存</button>${getPwdHash()?`<button class="btn soft" onclick="closeM();lockNow()">🔒 立即锁定</button>`:''}<button class="btn soft" onclick="closeM()">取消</button></div>`);
   $('#wbAv').onchange = e=>{ const f=e.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=()=>{ state.avatar=r.result; $('#wbAvPrev').innerHTML=`<img src="${esc(r.result)}" style="width:42px;height:42px;border-radius:50%;object-fit:cover">`; }; r.readAsDataURL(f); };
   $('#wbBg').onchange = e=>{ const f=e.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=()=>{ state.bg=r.result; }; r.readAsDataURL(f); };
 }
@@ -2198,7 +2358,7 @@ const SYNC = {
   }
 };
 
-function buildPayload(){ return {state, cardTheme, navTheme:getCurNav(), __sync:{at:Date.now(), dev:deviceId}, _feed:feedLastRefresh}; }
+function buildPayload(){ return {state, cardTheme, navTheme:getCurNav(), __sync:{at:Date.now(), dev:deviceId}, _feed:feedLastRefresh, _passHash:getPwdHash()}; }
 function setSyncStatus(s){ syncStatus=s; const el=document.getElementById('syncStat'); if(el) el.textContent=s||''; }
 
 async function syncPush(){
@@ -2224,6 +2384,7 @@ async function syncPull(force){
       if(remote.state) state=remote.state;
       if(remote.cardTheme) cardTheme=remote.cardTheme;
       if(remote._feed) feedLastRefresh=remote._feed;
+      if(remote._passHash){ LS.set('passHash', remote._passHash); const sbLock=document.getElementById('sbLock'); if(sbLock) sbLock.style.display=''; }
       const nav=remote.navTheme||getCurNav();
       document.body.className=nav+' cards-'+(cardTheme||'rainbow');
       LS.set('feedLastRefresh',feedLastRefresh);
@@ -2436,6 +2597,96 @@ function closeDrawer(){ $('#sidebar').classList.remove('open'); $('#overlay').cl
 
 function openModal(title,html){ $('#modal').innerHTML=`<h2>${title}</h2>${html}`; $('#mask').classList.add('show'); }
 
+/* ========== 访问密码保护（本地锁屏，密码仅以 SHA-256 哈希存储，绝不存明文） ========== */
+function getPwdHash(){ return LS.get('passHash',''); }
+function sha256Hex(str){
+  function rrot(x,n){ return (x>>>n)|(x<<(32-n)); }
+  const h=[0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
+  const k=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+  let msg=unescape(encodeURIComponent(str));
+  const bitLen=msg.length*8;
+  msg+='\x80';
+  while(msg.length%64!==56) msg+='\x00';
+  for(let i=0;i<8;i++) msg+=String.fromCharCode(((bitLen/Math.pow(2,(7-i)*8))&0xff));
+  const w=new Array(64);
+  for(let off=0;off<msg.length;off+=64){
+    for(let i=0;i<16;i++){ w[i]=(msg.charCodeAt(off+i*4)<<24)|(msg.charCodeAt(off+i*4+1)<<16)|(msg.charCodeAt(off+i*4+2)<<8)|(msg.charCodeAt(off+i*4+3)); }
+    for(let i=16;i<64;i++){ const s0=rrot(w[i-15],7)^rrot(w[i-15],18)^(w[i-15]>>>3); const s1=rrot(w[i-2],17)^rrot(w[i-2],19)^(w[i-2]>>>10); w[i]=(w[i-16]+s0+w[i-7]+s1)>>>0; }
+    let a=h[0],b=h[1],c=h[2],d=h[3],e=h[4],f=h[5],g=h[6],jj=h[7];
+    for(let i=0;i<64;i++){
+      const S1=rrot(e,6)^rrot(e,11)^rrot(e,25); const ch=(e&f)^((~e)&g); const t1=(jj+S1+ch+k[i]+w[i])>>>0;
+      const S0=rrot(a,2)^rrot(a,13)^rrot(a,22); const maj=(a&b)^(a&c)^(b&c); const t2=(S0+maj)>>>0;
+      jj=g; g=f; f=e; e=(d+t1)>>>0; d=c; c=b; b=a; a=(t1+t2)>>>0;
+    }
+    h[0]=(h[0]+a)>>>0; h[1]=(h[1]+b)>>>0; h[2]=(h[2]+c)>>>0; h[3]=(h[3]+d)>>>0; h[4]=(h[4]+e)>>>0; h[5]=(h[5]+f)>>>0; h[6]=(h[6]+g)>>>0; h[7]=(h[7]+jj)>>>0;
+  }
+  return h.map(x=>('00000000'+x.toString(16)).slice(-8)).join('');
+}
+function showLockScreen(){
+  const app=document.querySelector('.app'); if(app) app.style.visibility='hidden';
+  const el=document.getElementById('lockScreen');
+  el.innerHTML='<div class="lock-card">'
+    +'<div class="lc-emoji">🔐</div>'
+    +'<div class="lc-title">工作台已上锁</div>'
+    +'<div class="lc-sub">输入访问密码以查看内容</div>'
+    +'<input type="password" id="lockInput" placeholder="访问密码" autocomplete="off" onkeydown="if(event.key===\'Enter\')unlock()">'
+    +'<div class="lock-err" id="lockErr"></div>'
+    +'<button class="btn" onclick="unlock()">🔓 解锁</button>'
+    +'</div>';
+  el.style.display='flex';
+  const inp=document.getElementById('lockInput'); if(inp) inp.focus();
+}
+function hideLockScreen(){
+  const el=document.getElementById('lockScreen'); if(el){ el.style.display='none'; el.innerHTML=''; }
+  const app=document.querySelector('.app'); if(app) app.style.visibility='visible';
+}
+function unlock(){
+  const inp=document.getElementById('lockInput'); const err=document.getElementById('lockErr');
+  if(!inp) return;
+  const v=inp.value;
+  if(sha256Hex(v)===getPwdHash()){ hideLockScreen(); }
+  else { if(err) err.textContent='密码错误，请重试'; inp.value=''; inp.focus(); }
+}
+function lockNow(){ showLockScreen(); }
+function savePassword(){
+  const cur=getPwdHash();
+  const pwNew=document.getElementById('pwNew');
+  const pwNew2=document.getElementById('pwNew2');
+  const n=pwNew?pwNew.value.trim():'';
+  const n2=pwNew2?pwNew2.value.trim():'';
+  if(cur){
+    const pwCur=document.getElementById('pwCur');
+    const c=pwCur?pwCur.value.trim():'';
+    if(sha256Hex(c)!==cur){ alert('当前密码不正确'); return; }
+    if(n){
+      if(n.length<4){ alert('新密码至少 4 位'); return; }
+      if(n!==n2){ alert('两次输入的新密码不一致'); return; }
+      LS.set('passHash', sha256Hex(n));
+    }
+    alert('密码已更新'); closeM();
+  } else {
+    if(!n){ alert('请输入要设置的访问密码'); return; }
+    if(n.length<4){ alert('密码至少 4 位'); return; }
+    if(n!==n2){ alert('两次输入的密码不一致'); return; }
+    LS.set('passHash', sha256Hex(n));
+    alert('已启用密码保护'); closeM(); showLockScreen();
+  }
+  const sbLock=document.getElementById('sbLock'); if(sbLock) sbLock.style.display=getPwdHash()?'':'none';
+}
+function removePassword(){
+  const cur=getPwdHash();
+  if(cur){
+    const pwCur=document.getElementById('pwCur');
+    const c=pwCur?pwCur.value.trim():'';
+    if(sha256Hex(c)!==cur){ alert('当前密码不正确'); return; }
+  }
+  if(!confirm('确定关闭密码保护？之后任何人打开网址都能直接查看内容。')) return;
+  LS.set('passHash','');
+  const sbLock=document.getElementById('sbLock'); if(sbLock) sbLock.style.display='none';
+  closeM();
+  alert('已关闭密码保护');
+}
+
 /* 启动 */
 /* 解析分享链接 #/sync/backend/id，自动加入同一云端空间 */
 (function(){
@@ -2455,6 +2706,8 @@ window.addEventListener('hashchange',()=>{
 renderNav();
 renderModule();
 const sbDateEl=document.getElementById('sbDate'); if(sbDateEl) sbDateEl.textContent=fmtDate(new Date()).replace(/-/g,'/');
+const sbLock=document.getElementById('sbLock'); if(sbLock) sbLock.style.display=getPwdHash()?'':'none';
+if(getPwdHash()){ showLockScreen(); }
 if('serviceWorker' in navigator){ window.addEventListener('load',()=>{ navigator.serviceWorker.register('sw.js').catch(()=>{}); }); }
 document.addEventListener('visibilitychange',()=>{ if(syncCfg.auto){ if(document.visibilityState==='visible') syncPull(false); else syncPush(); } });
 window.addEventListener('online',()=>{ if(syncCfg.auto) syncPull(false).then(syncPush); });

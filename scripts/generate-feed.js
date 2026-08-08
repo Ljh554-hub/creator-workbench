@@ -37,6 +37,11 @@ function pick(arr, n) {
   return shuffled.slice(0, n);
 }
 
+// 基于书名生成豆瓣搜索链接，避免硬编码 subject ID 失效导致链接错位
+function bookSearchUrl(title) {
+  return 'https://book.douban.com/subject_search?search_text=' + encodeURIComponent((title || '').trim());
+}
+
 // ============ 播客内容池 ============
 const PODCAST_POOL = [
   // 经济类
@@ -148,7 +153,7 @@ function generateExpress() {
 }
 
 function generateBooks() {
-  const items = pick(BOOKS_POOL, 5);
+  const items = pick(BOOKS_POOL, 5).map(b => ({ ...b, url: bookSearchUrl(b.title) }));
   return { topic: "books", date: DATE_STR, updatedAt: TIME_STR, items };
 }
 

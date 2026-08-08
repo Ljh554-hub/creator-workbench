@@ -1,15 +1,47 @@
 {
   "topic": "books",
-  "date": "2026-08-05",
-  "updatedAt": "2026-08-05T15:06:00+08:00",
+  "date": "2026-08-08",
+  "updatedAt": "2026-08-08T03:58:44+08:00",
   "items": [
-    {"title":"翦商","author":"李硕","source":"抖音/头条「硬核历史书单」高频推荐","cat":"历史","reason":"考古重审华夏文明的暴力底色","url":"https://m.toutiao.com/article/7590218952220738054/"},
-    {"title":"万历十五年","author":"黄仁宇","source":"抖音读书号+人民日报30本好书书单","cat":"历史","reason":"平淡一年里藏着帝国衰亡密码","url":"https://m.toutiao.com/a7656405863338394164"},
-    {"title":"故宫文物南迁","author":"祝勇","source":"2026开年「中国好书」榜，读书号高频推荐","cat":"历史","reason":"两万箱国宝南迁，一件未失","url":"https://www.toutiao.com/article/7631489740398674438"},
-    {"title":"咸的玩笑","author":"刘震云","source":"抖音/头条2026上半年文学榜爆款（豆瓣8.6，待核实）","cat":"文学","reason":"用最贫的话，写最彻骨的凉","url":"https://www.toutiao.com/a7646329461238956550"},
-    {"title":"九诗心：暗夜里的文学启明","author":"黄晓丹","source":"读书号/播客涨知识书单推荐","cat":"文学","reason":"九位诗人回应当下人生困境","url":"https://www.toutiao.com/article/7631489740398674438"},
-    {"title":"一句顶一万句","author":"刘震云","source":"央视推荐书目+抖音读书号高频提及","cat":"文学","reason":"写透中国人骨子里的孤独与寻找","url":"https://aiqicha.baidu.com/details/rankList?query=66e44714143352616cbbb187c00b5bdb&type=20"},
-    {"title":"鱼不存在","author":"露露·米勒","source":"抖音/头条2026年初刷屏神作，连续霸榜","cat":"成长","reason":"规则是人造的，秩序得自己建","url":"https://www.toutiao.com/a7646329461238956550"},
-    {"title":"女性的权利","author":"玛丽·沃斯通克拉夫特","source":"播客《不上班 Out of Office》Ep.37 与译者对谈","cat":"成长","reason":"1792年的呐喊，今天仍振聋发聩","url":"https://earsonme.com/episodes/BkYFFCepHJ6P"}
+    {
+      "title": "康熙的红票",
+      "author": "孙立天",
+      "source": "新锐历史",
+      "cat": "历史",
+      "reason": "以小见大，揭开清代中西交流真相。",
+      "url": "https://book.douban.com/subject_search?search_text=%E5%BA%B7%E7%86%99%E7%9A%84%E7%BA%A2%E7%A5%A8"
+    },
+    {
+      "title": "何以中国",
+      "author": "葛剑雄",
+      "source": "历史经典",
+      "cat": "历史",
+      "reason": "追问中华文明源头，重塑文化认同。",
+      "url": "https://book.douban.com/subject_search?search_text=%E4%BD%95%E4%BB%A5%E4%B8%AD%E5%9B%BD"
+    },
+    {
+      "title": "我决定要活得很久",
+      "author": "陈鲁豫",
+      "source": "女性成长",
+      "cat": "成长",
+      "reason": "34位女性的生命韧性与勇气。",
+      "url": "https://book.douban.com/subject_search?search_text=%E6%88%91%E5%86%B3%E5%AE%9A%E8%A6%81%E6%B4%BB%E5%BE%97%E5%BE%88%E4%B9%85"
+    },
+    {
+      "title": "认知觉醒",
+      "author": "周岭",
+      "source": "成长励志",
+      "cat": "成长",
+      "reason": "破解行动力困局，实现自我进化。",
+      "url": "https://book.douban.com/subject_search?search_text=%E8%AE%A4%E7%9F%A5%E8%A7%89%E9%86%92"
+    },
+    {
+      "title": "金钱心理学",
+      "author": "摩根·豪泽尔",
+      "source": "财商思维",
+      "cat": "成长",
+      "reason": "关于财富、贪婪与幸福的日常智慧。",
+      "url": "https://book.douban.com/subject_search?search_text=%E9%87%91%E9%92%B1%E5%BF%83%E7%90%86%E5%AD%A6"
+    }
   ]
 }
