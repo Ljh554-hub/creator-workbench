@@ -1,8 +1,24 @@
 {
   "topic": "podcast",
-  "date": "2026-08-09",
-  "updatedAt": "2026-08-09T04:51:15+08:00",
+  "date": "2026-08-10",
+  "updatedAt": "2026-08-10T06:00:27+08:00",
   "items": [
+    {
+      "title": "尽兴小灶 EP09 克服迷茫焦虑：成事指南《毛泽东选集》",
+      "author": "汪汪 & 小棠",
+      "platform": "喜马拉雅",
+      "tag": "毛选",
+      "reason": "用实践论、矛盾论拆解人生低谷。",
+      "url": "https://m.ximalaya.com/sound/950230607"
+    },
+    {
+      "title": "毛选里的方法论 第8讲：实践论如何指导日常决策",
+      "author": "@红色读书会",
+      "platform": "喜马拉雅",
+      "tag": "毛选",
+      "reason": "从认识-实践-再认识的循环中找到行动力。",
+      "url": ""
+    },
     {
       "title": "women elevated EP25：女性如何建立个人品牌",
       "author": "@她力量",
@@ -28,28 +44,12 @@
       "url": ""
     },
     {
-      "title": "跨国串门儿计划 #656 All-In：芯片股暴跌与追加保证金",
-      "author": "一凯（All-In Podcast 中文译制）",
-      "platform": "小宇宙",
-      "tag": "经济",
-      "reason": "长期看对为何仍会先被杠杆杀死。",
-      "url": ""
-    },
-    {
-      "title": "見她見己｜女性成长与职场重塑指南",
-      "author": "苗子_Nmnx",
-      "platform": "小宇宙",
-      "tag": "女性成长",
-      "reason": "HR出身主播拆掉30+职场内耗执念。",
-      "url": "https://www.xiaoyuzhoufm.com/podcast/69bb66f9e6504fc1cc7d59d2"
-    },
-    {
-      "title": "知本论 vol.163 摩根·豪泽尔：怎样花钱买到快乐？",
-      "author": "中信书院 · 冰洁 × 携隐Melody",
-      "platform": "小宇宙",
-      "tag": "经济",
-      "reason": "把《金钱心理学》聊成可用的花钱观。",
-      "url": "https://www.xiaoyuzhoufm.com/episode/6a589897a4972c496dfcc5d8"
+      "title": "大佳的成长磁场 Vol.53 毛选笔记⑤：领导力的技术与艺术",
+      "author": "大佳",
+      "platform": "Apple Podcasts",
+      "tag": "毛选",
+      "reason": "毛选笔记收官，把出主意、用干部拆成领导力方法。",
+      "url": "https://podcasts.apple.com/cn/podcast/id1829445873"
     }
   ]
 }
