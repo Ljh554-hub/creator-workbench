@@ -1,24 +1,8 @@
 {
   "topic": "podcast",
-  "date": "2026-08-18",
-  "updatedAt": "2026-08-18T03:27:40+08:00",
+  "date": "2026-08-19",
+  "updatedAt": "2026-08-19T03:32:25+08:00",
   "items": [
-    {
-      "title": "見她見己｜女性成长与职场重塑指南",
-      "author": "苗子_Nmnx",
-      "platform": "小宇宙",
-      "tag": "女性成长",
-      "reason": "HR出身主播拆掉30+职场内耗执念。",
-      "url": "https://www.xiaoyuzhoufm.com/podcast/69bb66f9e6504fc1cc7d59d2"
-    },
-    {
-      "title": "尽兴小灶 EP09 克服迷茫焦虑：成事指南《毛泽东选集》",
-      "author": "汪汪 & 小棠",
-      "platform": "喜马拉雅",
-      "tag": "毛选",
-      "reason": "用实践论、矛盾论拆解人生低谷。",
-      "url": "https://m.ximalaya.com/sound/950230607"
-    },
     {
       "title": "十分吸引 Vol.76 分裂与抢钱：K型分化下的全球资产定价",
       "author": "石磊 / 敏姐",
@@ -28,12 +12,20 @@
       "url": "https://www.xiaoyuzhoufm.com/podcast/66b4ec5e29b084247093375f"
     },
     {
-      "title": "大佳的成长磁场 Vol.53 毛选笔记⑤：领导力的技术与艺术",
-      "author": "大佳",
-      "platform": "Apple Podcasts",
-      "tag": "毛选",
-      "reason": "毛选笔记收官，把出主意、用干部拆成领导力方法。",
-      "url": "https://podcasts.apple.com/cn/podcast/id1829445873"
+      "title": "无人之境 Vol.103 通缩年代的资产配置实操手册",
+      "author": "@冷眼观经济",
+      "platform": "小宇宙",
+      "tag": "经济",
+      "reason": "用大白话讲清利率、通胀与个人现金流的关系。",
+      "url": ""
+    },
+    {
+      "title": "知本论 vol.163 摩根·豪泽尔：怎样花钱买到快乐？",
+      "author": "中信书院 · 冰洁 × 携隐Melody",
+      "platform": "小宇宙",
+      "tag": "经济",
+      "reason": "把《金钱心理学》聊成可用的花钱观。",
+      "url": "https://www.xiaoyuzhoufm.com/episode/6a589897a4972c496dfcc5d8"
     },
     {
       "title": "毛选里的方法论 第8讲：实践论如何指导日常决策",
@@ -44,12 +36,20 @@
       "url": ""
     },
     {
-      "title": "知本论 vol.163 摩根·豪泽尔：怎样花钱买到快乐？",
-      "author": "中信书院 · 冰洁 × 携隐Melody",
+      "title": "商业就是这样 Q3特辑：消费降级还是消费分级？",
+      "author": "@第一财经",
       "platform": "小宇宙",
       "tag": "经济",
-      "reason": "把《金钱心理学》聊成可用的花钱观。",
-      "url": "https://www.xiaoyuzhoufm.com/episode/6a589897a4972c496dfcc5d8"
+      "reason": "一份结构清晰的季度消费地图。",
+      "url": ""
+    },
+    {
+      "title": "《毛选》里的成长智慧：知行合一方法论",
+      "author": "蒲谦谦",
+      "platform": "蜻蜓FM",
+      "tag": "毛选",
+      "reason": "把经典篇章变成对抗内耗的行动方法论。",
+      "url": "http://www.qtfm.cn/channels/530173"
     }
   ]
 }
