@@ -1,31 +1,15 @@
 {
   "topic": "podcast",
-  "date": "2026-08-21",
-  "updatedAt": "2026-08-21T03:38:16+08:00",
+  "date": "2026-08-22",
+  "updatedAt": "2026-08-22T03:24:59+08:00",
   "items": [
     {
-      "title": "《毛选》里的成长智慧：知行合一方法论",
-      "author": "蒲谦谦",
-      "platform": "蜻蜓FM",
-      "tag": "毛选",
-      "reason": "把经典篇章变成对抗内耗的行动方法论。",
-      "url": "http://www.qtfm.cn/channels/530173"
-    },
-    {
-      "title": "大佳的成长磁场 Vol.53 毛选笔记⑤：领导力的技术与艺术",
-      "author": "大佳",
-      "platform": "Apple Podcasts",
-      "tag": "毛选",
-      "reason": "毛选笔记收官，把出主意、用干部拆成领导力方法。",
-      "url": "https://podcasts.apple.com/cn/podcast/id1829445873"
-    },
-    {
-      "title": "商业就是这样 Q3特辑：消费降级还是消费分级？",
-      "author": "@第一财经",
+      "title": "十分吸引 Vol.76 分裂与抢钱：K型分化下的全球资产定价",
+      "author": "石磊 / 敏姐",
       "platform": "小宇宙",
       "tag": "经济",
-      "reason": "一份结构清晰的季度消费地图。",
-      "url": ""
+      "reason": "138分钟深圳线下演讲，讲透K型分化下钱被谁抢走。",
+      "url": "https://www.xiaoyuzhoufm.com/podcast/66b4ec5e29b084247093375f"
     },
     {
       "title": "見她見己｜女性成长与职场重塑指南",
@@ -36,12 +20,12 @@
       "url": "https://www.xiaoyuzhoufm.com/podcast/69bb66f9e6504fc1cc7d59d2"
     },
     {
-      "title": "十分吸引 Vol.76 分裂与抢钱：K型分化下的全球资产定价",
-      "author": "石磊 / 敏姐",
-      "platform": "小宇宙",
-      "tag": "经济",
-      "reason": "138分钟深圳线下演讲，讲透K型分化下钱被谁抢走。",
-      "url": "https://www.xiaoyuzhoufm.com/podcast/66b4ec5e29b084247093375f"
+      "title": "《毛选》里的成长智慧：知行合一方法论",
+      "author": "蒲谦谦",
+      "platform": "蜻蜓FM",
+      "tag": "毛选",
+      "reason": "把经典篇章变成对抗内耗的行动方法论。",
+      "url": "http://www.qtfm.cn/channels/530173"
     },
     {
       "title": "岩中花述 S9E3 鲁豫对话蔡皋：种花种草种春天",
@@ -50,6 +34,22 @@
       "tag": "女性成长",
       "reason": "八旬绘本画家的晚熟人生样本。",
       "url": "https://www.xiaoyuzhoufm.com/episode/6a1eb4cc7444b57222322dcf"
+    },
+    {
+      "title": "知本论 vol.163 摩根·豪泽尔：怎样花钱买到快乐？",
+      "author": "中信书院 · 冰洁 × 携隐Melody",
+      "platform": "小宇宙",
+      "tag": "经济",
+      "reason": "把《金钱心理学》聊成可用的花钱观。",
+      "url": "https://www.xiaoyuzhoufm.com/episode/6a589897a4972c496dfcc5d8"
+    },
+    {
+      "title": "跨国串门儿计划 #656 All-In：芯片股暴跌与追加保证金",
+      "author": "一凯（All-In Podcast 中文译制）",
+      "platform": "小宇宙",
+      "tag": "经济",
+      "reason": "长期看对为何仍会先被杠杆杀死。",
+      "url": ""
     }
   ]
 }
