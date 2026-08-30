@@ -1,31 +1,23 @@
 {
   "topic": "books",
-  "date": "2026-08-29",
-  "updatedAt": "2026-08-29T07:35:34+08:00",
+  "date": "2026-08-30",
+  "updatedAt": "2026-08-30T06:08:43+08:00",
   "items": [
     {
-      "title": "金钱心理学",
-      "author": "摩根·豪泽尔",
-      "source": "财商思维",
-      "cat": "成长",
-      "reason": "关于财富、贪婪与幸福的日常智慧。",
-      "url": "https://book.douban.com/subject_search?search_text=%E9%87%91%E9%92%B1%E5%BF%83%E7%90%86%E5%AD%A6"
+      "title": "活着",
+      "author": "余华",
+      "source": "文学经典",
+      "cat": "文学",
+      "reason": "在苦难中读懂活着本身的意义。",
+      "url": "https://book.douban.com/subject_search?search_text=%E6%B4%BB%E7%9D%80"
     },
     {
-      "title": "认知觉醒",
-      "author": "周岭",
-      "source": "成长励志",
-      "cat": "成长",
-      "reason": "破解行动力困局，实现自我进化。",
-      "url": "https://book.douban.com/subject_search?search_text=%E8%AE%A4%E7%9F%A5%E8%A7%89%E9%86%92"
-    },
-    {
-      "title": "置身事内",
-      "author": "兰小欢",
-      "source": "经济科普",
-      "cat": "经济",
-      "reason": "读懂中国政府与经济发展的底层逻辑。",
-      "url": "https://book.douban.com/subject_search?search_text=%E7%BD%AE%E8%BA%AB%E4%BA%8B%E5%86%85"
+      "title": "围城",
+      "author": "钱钟书",
+      "source": "文学经典",
+      "cat": "文学",
+      "reason": "精准道破婚姻与人生的围城困境。",
+      "url": "https://book.douban.com/subject_search?search_text=%E5%9B%B4%E5%9F%8E"
     },
     {
       "title": "长安的荔枝",
@@ -36,12 +28,20 @@
       "url": "https://book.douban.com/subject_search?search_text=%E9%95%BF%E5%AE%89%E7%9A%84%E8%8D%94%E6%9E%9D"
     },
     {
-      "title": "活着",
-      "author": "余华",
-      "source": "文学经典",
-      "cat": "文学",
-      "reason": "在苦难中读懂活着本身的意义。",
-      "url": "https://book.douban.com/subject_search?search_text=%E6%B4%BB%E7%9D%80"
+      "title": "康熙的红票",
+      "author": "孙立天",
+      "source": "新锐历史",
+      "cat": "历史",
+      "reason": "以小见大，揭开清代中西交流真相。",
+      "url": "https://book.douban.com/subject_search?search_text=%E5%BA%B7%E7%86%99%E7%9A%84%E7%BA%A2%E7%A5%A8"
+    },
+    {
+      "title": "明朝那些事儿(壹)",
+      "author": "当年明月",
+      "source": "通俗历史",
+      "cat": "历史",
+      "reason": "让历史变得比小说还好看的开篇之作。",
+      "url": "https://book.douban.com/subject_search?search_text=%E6%98%8E%E6%9C%9D%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF(%E5%A3%B9)"
     }
   ]
 }
