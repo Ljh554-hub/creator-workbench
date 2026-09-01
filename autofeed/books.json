@@ -1,15 +1,15 @@
 {
   "topic": "books",
-  "date": "2026-08-31",
-  "updatedAt": "2026-08-31T06:33:21+08:00",
+  "date": "2026-09-01",
+  "updatedAt": "2026-09-01T05:57:49+08:00",
   "items": [
     {
-      "title": "认知觉醒",
-      "author": "周岭",
-      "source": "成长励志",
-      "cat": "成长",
-      "reason": "破解行动力困局，实现自我进化。",
-      "url": "https://book.douban.com/subject_search?search_text=%E8%AE%A4%E7%9F%A5%E8%A7%89%E9%86%92"
+      "title": "何以中国",
+      "author": "葛剑雄",
+      "source": "历史经典",
+      "cat": "历史",
+      "reason": "追问中华文明源头，重塑文化认同。",
+      "url": "https://book.douban.com/subject_search?search_text=%E4%BD%95%E4%BB%A5%E4%B8%AD%E5%9B%BD"
     },
     {
       "title": "长安的荔枝",
@@ -20,20 +20,20 @@
       "url": "https://book.douban.com/subject_search?search_text=%E9%95%BF%E5%AE%89%E7%9A%84%E8%8D%94%E6%9E%9D"
     },
     {
-      "title": "你当像鸟飞往你的山",
-      "author": "塔拉·韦斯特弗",
-      "source": "成长励志",
-      "cat": "成长",
-      "reason": "教育如何重塑自我与命运。",
-      "url": "https://book.douban.com/subject_search?search_text=%E4%BD%A0%E5%BD%93%E5%83%8F%E9%B8%9F%E9%A3%9E%E5%BE%80%E4%BD%A0%E7%9A%84%E5%B1%B1"
-    },
-    {
       "title": "置身事内",
       "author": "兰小欢",
       "source": "经济科普",
       "cat": "经济",
       "reason": "读懂中国政府与经济发展的底层逻辑。",
       "url": "https://book.douban.com/subject_search?search_text=%E7%BD%AE%E8%BA%AB%E4%BA%8B%E5%86%85"
+    },
+    {
+      "title": "金钱心理学",
+      "author": "摩根·豪泽尔",
+      "source": "财商思维",
+      "cat": "成长",
+      "reason": "关于财富、贪婪与幸福的日常智慧。",
+      "url": "https://book.douban.com/subject_search?search_text=%E9%87%91%E9%92%B1%E5%BF%83%E7%90%86%E5%AD%A6"
     },
     {
       "title": "活着",
