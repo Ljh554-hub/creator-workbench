@@ -1,8 +1,24 @@
 {
   "topic": "podcast",
-  "date": "2026-09-02",
-  "updatedAt": "2026-09-02T05:21:08+08:00",
+  "date": "2026-09-03",
+  "updatedAt": "2026-09-03T05:24:47+08:00",
   "items": [
+    {
+      "title": "无人之境 Vol.103 通缩年代的资产配置实操手册",
+      "author": "@冷眼观经济",
+      "platform": "小宇宙",
+      "tag": "经济",
+      "reason": "用大白话讲清利率、通胀与个人现金流的关系。",
+      "url": ""
+    },
+    {
+      "title": "尽兴小灶 EP09 克服迷茫焦虑：成事指南《毛泽东选集》",
+      "author": "汪汪 & 小棠",
+      "platform": "喜马拉雅",
+      "tag": "毛选",
+      "reason": "用实践论、矛盾论拆解人生低谷。",
+      "url": "https://m.ximalaya.com/sound/950230607"
+    },
     {
       "title": "知本论 vol.163 摩根·豪泽尔：怎样花钱买到快乐？",
       "author": "中信书院 · 冰洁 × 携隐Melody",
@@ -12,28 +28,12 @@
       "url": "https://www.xiaoyuzhoufm.com/episode/6a589897a4972c496dfcc5d8"
     },
     {
-      "title": "毛选里的方法论 第8讲：实践论如何指导日常决策",
-      "author": "@红色读书会",
-      "platform": "喜马拉雅",
+      "title": "《毛选》里的成长智慧：知行合一方法论",
+      "author": "蒲谦谦",
+      "platform": "蜻蜓FM",
       "tag": "毛选",
-      "reason": "从认识-实践-再认识的循环中找到行动力。",
-      "url": ""
-    },
-    {
-      "title": "十分吸引 Vol.76 分裂与抢钱：K型分化下的全球资产定价",
-      "author": "石磊 / 敏姐",
-      "platform": "小宇宙",
-      "tag": "经济",
-      "reason": "138分钟深圳线下演讲，讲透K型分化下钱被谁抢走。",
-      "url": "https://www.xiaoyuzhoufm.com/podcast/66b4ec5e29b084247093375f"
-    },
-    {
-      "title": "商业就是这样 Q3特辑：消费降级还是消费分级？",
-      "author": "@第一财经",
-      "platform": "小宇宙",
-      "tag": "经济",
-      "reason": "一份结构清晰的季度消费地图。",
-      "url": ""
+      "reason": "把经典篇章变成对抗内耗的行动方法论。",
+      "url": "http://www.qtfm.cn/channels/530173"
     },
     {
       "title": "跨国串门儿计划 #656 All-In：芯片股暴跌与追加保证金",
@@ -44,12 +44,12 @@
       "url": ""
     },
     {
-      "title": "《毛选》里的成长智慧：知行合一方法论",
-      "author": "蒲谦谦",
-      "platform": "蜻蜓FM",
-      "tag": "毛选",
-      "reason": "把经典篇章变成对抗内耗的行动方法论。",
-      "url": "http://www.qtfm.cn/channels/530173"
+      "title": "十分吸引 Vol.76 分裂与抢钱：K型分化下的全球资产定价",
+      "author": "石磊 / 敏姐",
+      "platform": "小宇宙",
+      "tag": "经济",
+      "reason": "138分钟深圳线下演讲，讲透K型分化下钱被谁抢走。",
+      "url": "https://www.xiaoyuzhoufm.com/podcast/66b4ec5e29b084247093375f"
     }
   ]
 }
