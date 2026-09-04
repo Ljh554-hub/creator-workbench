@@ -1,7 +1,7 @@
 {
   "topic": "books",
-  "date": "2026-09-03",
-  "updatedAt": "2026-09-03T05:24:47+08:00",
+  "date": "2026-09-04",
+  "updatedAt": "2026-09-04T05:21:18+08:00",
   "items": [
     {
       "title": "活着",
@@ -12,20 +12,28 @@
       "url": "https://book.douban.com/subject_search?search_text=%E6%B4%BB%E7%9D%80"
     },
     {
-      "title": "何以中国",
-      "author": "葛剑雄",
-      "source": "历史经典",
-      "cat": "历史",
-      "reason": "追问中华文明源头，重塑文化认同。",
-      "url": "https://book.douban.com/subject_search?search_text=%E4%BD%95%E4%BB%A5%E4%B8%AD%E5%9B%BD"
+      "title": "围城",
+      "author": "钱钟书",
+      "source": "文学经典",
+      "cat": "文学",
+      "reason": "精准道破婚姻与人生的围城困境。",
+      "url": "https://book.douban.com/subject_search?search_text=%E5%9B%B4%E5%9F%8E"
     },
     {
-      "title": "置身事内",
-      "author": "兰小欢",
-      "source": "经济科普",
-      "cat": "经济",
-      "reason": "读懂中国政府与经济发展的底层逻辑。",
-      "url": "https://book.douban.com/subject_search?search_text=%E7%BD%AE%E8%BA%AB%E4%BA%8B%E5%86%85"
+      "title": "长安的荔枝",
+      "author": "马伯庸",
+      "source": "历史小说",
+      "cat": "文学",
+      "reason": "历史小人物的社畜求生实录。",
+      "url": "https://book.douban.com/subject_search?search_text=%E9%95%BF%E5%AE%89%E7%9A%84%E8%8D%94%E6%9E%9D"
+    },
+    {
+      "title": "康熙的红票",
+      "author": "孙立天",
+      "source": "新锐历史",
+      "cat": "历史",
+      "reason": "以小见大，揭开清代中西交流真相。",
+      "url": "https://book.douban.com/subject_search?search_text=%E5%BA%B7%E7%86%99%E7%9A%84%E7%BA%A2%E7%A5%A8"
     },
     {
       "title": "被讨厌的勇气",
@@ -34,14 +42,6 @@
       "cat": "成长",
       "reason": "阿德勒心理学入门，自由就是被别人讨厌。",
       "url": "https://book.douban.com/subject_search?search_text=%E8%A2%AB%E8%AE%A8%E5%8E%8C%E7%9A%84%E5%8B%87%E6%B0%94"
-    },
-    {
-      "title": "认知觉醒",
-      "author": "周岭",
-      "source": "成长励志",
-      "cat": "成长",
-      "reason": "破解行动力困局，实现自我进化。",
-      "url": "https://book.douban.com/subject_search?search_text=%E8%AE%A4%E7%9F%A5%E8%A7%89%E9%86%92"
     }
   ]
 }
