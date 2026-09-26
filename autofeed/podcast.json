@@ -1,24 +1,8 @@
 {
   "topic": "podcast",
-  "date": "2026-09-25",
-  "updatedAt": "2026-09-25T05:42:00+08:00",
+  "date": "2026-09-26",
+  "updatedAt": "2026-09-26T05:44:56+08:00",
   "items": [
-    {
-      "title": "women elevated EP25：女性如何建立个人品牌",
-      "author": "@她力量",
-      "platform": "小宇宙",
-      "tag": "女性成长",
-      "reason": "访谈多位行业女性，聊影响力建设。",
-      "url": ""
-    },
-    {
-      "title": "《毛选》里的成长智慧：知行合一方法论",
-      "author": "蒲谦谦",
-      "platform": "蜻蜓FM",
-      "tag": "毛选",
-      "reason": "把经典篇章变成对抗内耗的行动方法论。",
-      "url": "http://www.qtfm.cn/channels/530173"
-    },
     {
       "title": "无人之境 Vol.103 通缩年代的资产配置实操手册",
       "author": "@冷眼观经济",
@@ -28,12 +12,12 @@
       "url": ""
     },
     {
-      "title": "見她見己｜女性成长与职场重塑指南",
-      "author": "苗子_Nmnx",
+      "title": "跨国串门儿计划 #656 All-In：芯片股暴跌与追加保证金",
+      "author": "一凯（All-In Podcast 中文译制）",
       "platform": "小宇宙",
-      "tag": "女性成长",
-      "reason": "HR出身主播拆掉30+职场内耗执念。",
-      "url": "https://www.xiaoyuzhoufm.com/podcast/69bb66f9e6504fc1cc7d59d2"
+      "tag": "经济",
+      "reason": "长期看对为何仍会先被杠杆杀死。",
+      "url": ""
     },
     {
       "title": "毛选里的方法论 第8讲：实践论如何指导日常决策",
@@ -44,11 +28,27 @@
       "url": ""
     },
     {
-      "title": "跨国串门儿计划 #656 All-In：芯片股暴跌与追加保证金",
-      "author": "一凯（All-In Podcast 中文译制）",
+      "title": "大佳的成长磁场 Vol.53 毛选笔记⑤：领导力的技术与艺术",
+      "author": "大佳",
+      "platform": "Apple Podcasts",
+      "tag": "毛选",
+      "reason": "毛选笔记收官，把出主意、用干部拆成领导力方法。",
+      "url": "https://podcasts.apple.com/cn/podcast/id1829445873"
+    },
+    {
+      "title": "商业就是这样 Q3特辑：消费降级还是消费分级？",
+      "author": "@第一财经",
       "platform": "小宇宙",
       "tag": "经济",
-      "reason": "长期看对为何仍会先被杠杆杀死。",
+      "reason": "一份结构清晰的季度消费地图。",
+      "url": ""
+    },
+    {
+      "title": "women elevated EP25：女性如何建立个人品牌",
+      "author": "@她力量",
+      "platform": "小宇宙",
+      "tag": "女性成长",
+      "reason": "访谈多位行业女性，聊影响力建设。",
       "url": ""
     }
   ]
